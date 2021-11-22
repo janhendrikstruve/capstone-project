@@ -2,8 +2,9 @@ import React, { useState } from 'react'
 import logo from './logo.svg'
 import styles from './App.module.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import styled from 'styled-components'
 
-function App(): JSX.Element {
+export default function App(): JSX.Element {
   const [count, setCount] = useState<number>(0)
 
   return (
@@ -52,5 +53,3 @@ function App(): JSX.Element {
     </BrowserRouter>
   )
 }
-
-export default App
