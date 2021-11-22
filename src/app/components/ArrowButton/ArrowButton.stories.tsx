@@ -7,4 +7,4 @@ export default {
 }
 
 export const up = (): JSX.Element => <ArrowButton direction="up" />
-export const up = (): JSX.Element => <ArrowButton direction="Down" />
+export const down = (): JSX.Element => <ArrowButton direction="Down" />
