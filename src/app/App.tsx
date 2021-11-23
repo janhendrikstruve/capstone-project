@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import logo from './logo.svg'
 import styles from './App.module.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import styled from 'styled-components'
 
 export default function App(): JSX.Element {
   const [count, setCount] = useState<number>(0)
