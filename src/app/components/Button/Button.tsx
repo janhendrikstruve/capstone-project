@@ -1,13 +1,12 @@
 import type { ReactNode } from 'react'
 import React from 'react'
-import classes from './Button.module.css'
 import styled from 'styled-components'
 
 type ButtonProps = {
   children: ReactNode
 }
 export default function Button({ children }: ButtonProps): JSX.Element {
-  return <StyledButton className={classes.button}>{children}</StyledButton>
+  return <StyledButton>{children}</StyledButton>
 }
 
 const StyledButton = styled.button`
