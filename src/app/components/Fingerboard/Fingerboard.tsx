@@ -7,13 +7,13 @@ export default function Fingerboard(): JSX.Element {
   return (
     <StyledSection>
       {board.map((string) => (
-        <StyledSpan>
+        <YPosition>
           {string.map(() => (
-            <StyledDiv>
+            <XYPosition>
               <Guitarstring></Guitarstring>
-            </StyledDiv>
+            </XYPosition>
           ))}
-        </StyledSpan>
+        </YPosition>
       ))}
     </StyledSection>
   )
@@ -38,12 +38,12 @@ const StyledSection = styled.section`
   background-color: #202020;
 `
 
-const StyledSpan = styled.span`
+const YPosition = styled.span`
   display: grid;
   grid-gap: 2px;
 `
 
-const StyledDiv = styled.div`
+const XYPosition = styled.div`
   padding: 0 10px;
   background-color: #ffddbd;
 `
