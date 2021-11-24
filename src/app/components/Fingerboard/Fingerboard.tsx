@@ -23,7 +23,6 @@ const StyledSection = styled.section`
   &:after {
     content: ' ';
     position: absolute;
-    z-index: +11;
     top: 2px;
     left: 0px;
     right: 0px;

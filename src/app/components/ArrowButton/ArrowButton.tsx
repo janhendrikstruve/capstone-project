@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ArrowDown, ArrowUp } from '../Icons/Arrow'
+import { ArrowDown, ArrowUp } from '../../icons/Arrow'
 
 export default function ArrowButton({
   direction,
