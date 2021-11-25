@@ -1,11 +1,13 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
-import Fingerboard from './components/Fingerboard/Fingerboard'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Dashboard from './Pages/Dashboard/Dashboard'
 
 export default function App(): JSX.Element {
   return (
     <BrowserRouter>
-      <Fingerboard></Fingerboard>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+      </Routes>
     </BrowserRouter>
   )
 }
