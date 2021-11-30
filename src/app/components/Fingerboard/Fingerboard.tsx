@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { IconArray } from '../../Icons/IconArray'
+import { Fingerprint } from '../../Icons/IconList'
 
 type fingerboardProps = {
   handleClick?: (columnIndex: number, rowIndex: number) => void
@@ -88,9 +88,7 @@ const Guitarstring = styled.div`
   padding: 20px 0;
   border: 1px solid #b47601;
 `
-const PressIcon = styled(
-  IconArray[Math.floor(Math.random() * IconArray.length)]
-)`
+const PressIcon = styled(Fingerprint)`
   position: absolute;
   z-index: 100;
   left: 0;
