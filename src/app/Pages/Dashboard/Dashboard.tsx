@@ -2,6 +2,8 @@ import React from 'react'
 import { useState } from 'react'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import { FingerboardData } from '../../data/FingerboardData/FingerboardData'
+import Heading from '../../components/Heading/Heading'
+import styled from 'styled-components'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(FingerboardData)
@@ -17,5 +19,16 @@ export default function Dashboard(): JSX.Element {
     setPressed(newData)
   }
 
-  return <Fingerboard handleClick={handleClick} pressed={pressed}></Fingerboard>
+  return (
+    <StyledMain>
+      <Heading>Note Chord</Heading>
+      <Fingerboard handleClick={handleClick} pressed={pressed}></Fingerboard>
+    </StyledMain>
+  )
 }
+
+const StyledMain = styled.main`
+  display: grid;
+  justify-items: center;
+  grid-template-rows: 100px auto;
+`
