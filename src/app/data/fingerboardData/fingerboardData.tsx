@@ -1,4 +1,4 @@
-export const FingerboardData = {
+export const fingerboardData = {
   e2: 0,
   b: 0,
   g: 0,

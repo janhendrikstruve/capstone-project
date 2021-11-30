@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
-import { FingerboardData } from '../../data/FingerboardData/FingerboardData'
+import { fingerboardData } from '../../data/fingerboardData/fingerboardData'
 import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
 
 export default function Dashboard(): JSX.Element {
-  const [pressed, setPressed] = useState(FingerboardData)
+  const [pressed, setPressed] = useState(fingerboardData)
   function handleClick(column: number, row: number) {
     const newData = { ...pressed }
     if (column === 0) newData.e = ++row

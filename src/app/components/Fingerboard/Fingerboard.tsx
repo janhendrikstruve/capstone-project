@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Fingerprint } from '../../Icons/IconList'
+import { Fingerprint } from '../Icons/IconList'
 
 type fingerboardProps = {
   handleClick?: (columnIndex: number, rowIndex: number) => void
