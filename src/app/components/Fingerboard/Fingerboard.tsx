@@ -36,7 +36,6 @@ export default function Fingerboard({
     }
   }
   return (
-    // <Heading children='add chord'/>
     <Board>
       {board.map((column, columnIndex) => (
         <YPosition key={columnIndex}>
@@ -78,7 +77,6 @@ const YPosition = styled.span`
   display: grid;
   grid-gap: 2px;
 `
-
 const XYPosition = styled.div`
   padding: 0 10px;
   background-color: #ffddbd;

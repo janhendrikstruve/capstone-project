@@ -23,5 +23,5 @@ const StyledDiv = styled.div`
   align-self: center;
   padding: 2px 2px;
   border-radius: 4px;
-  background-color: #fff459; ;
+  background-color: #fff459;
 `

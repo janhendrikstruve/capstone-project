@@ -14,4 +14,13 @@ export default function ArrowButton({
   )
 }
 
-const StyledButton = styled.button``
+const StyledButton = styled.button`
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  width: 50px;
+`

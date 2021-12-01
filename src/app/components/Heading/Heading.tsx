@@ -12,4 +12,9 @@ export default function Heading({
 
 const StyledH1 = styled.h1`
   background-color: lightyellow;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  background-color: #fff459;
 `

@@ -4,6 +4,8 @@ import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import { fingerboardData } from '../../data/fingerboardData/fingerboardData'
 import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
+import Fret from '../../components/Fret/Fret'
+import ArrowButton from '../../components/ArrowButton/ArrowButton'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(fingerboardData)
@@ -22,7 +24,14 @@ export default function Dashboard(): JSX.Element {
   return (
     <StyledMain>
       <Heading>Note Chord</Heading>
-      <Fingerboard handleClick={handleClick} pressed={pressed}></Fingerboard>
+      <FingerboardFunctions>
+        <Fingerboard handleClick={handleClick} pressed={pressed}></Fingerboard>
+        <Arrows>
+          <ArrowButton direction="up"></ArrowButton>
+          <StyledFret start={1} end={4}></StyledFret>
+          <ArrowButton direction="down"></ArrowButton>
+        </Arrows>
+      </FingerboardFunctions>
     </StyledMain>
   )
 }
@@ -30,5 +39,18 @@ export default function Dashboard(): JSX.Element {
 const StyledMain = styled.main`
   display: grid;
   justify-items: center;
-  grid-template-rows: 100px auto;
+  grid-template-rows: auto auto;
+  grid-gap: 1rem;
+`
+
+const FingerboardFunctions = styled.div`
+  display: flex;
+`
+
+const StyledFret = styled(Fret)``
+
+const Arrows = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
