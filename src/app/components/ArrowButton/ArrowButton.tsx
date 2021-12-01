@@ -4,12 +4,14 @@ import { ArrowDown, ArrowUp } from '../Icons/Arrows'
 
 export default function ArrowButton({
   direction,
+  handleClick,
 }: {
-  direction: string
+  direction: boolean
+  handleClick: (direction: boolean) => void
 }): JSX.Element {
   return (
-    <StyledButton>
-      {direction === 'up' ? <ArrowUp /> : <ArrowDown />}
+    <StyledButton onClick={() => handleClick(direction)}>
+      {direction ? <ArrowUp /> : <ArrowDown />}
     </StyledButton>
   )
 }

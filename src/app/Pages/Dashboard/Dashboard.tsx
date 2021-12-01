@@ -9,16 +9,25 @@ import ArrowButton from '../../components/ArrowButton/ArrowButton'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(fingerboardData)
+  const [fretOffset, setFretOffset] = useState(0)
+
   function handleClick(column: number, row: number) {
-    const newData = { ...pressed }
-    if (column === 0) newData.e = ++row
-    if (column === 1) newData.a = ++row
-    if (column === 2) newData.d = ++row
-    if (column === 3) newData.g = ++row
-    if (column === 4) newData.b = ++row
-    if (column === 5) newData.e2 = ++row
-    console.log(newData)
-    setPressed(newData)
+    const newPressed = { ...pressed }
+    if (column === 0) newPressed.e = ++row
+    if (column === 1) newPressed.a = ++row
+    if (column === 2) newPressed.d = ++row
+    if (column === 3) newPressed.g = ++row
+    if (column === 4) newPressed.b = ++row
+    if (column === 5) newPressed.e2 = ++row
+    console.log(newPressed)
+    setPressed(newPressed)
+  }
+
+  function handleFretOffset(direction: boolean) {
+    let newFretOffset = fretOffset
+    if (direction && newFretOffset <= 15) newFretOffset++
+    if (!direction && newFretOffset >= 1) newFretOffset--
+    setFretOffset(newFretOffset)
   }
 
   return (
@@ -27,9 +36,15 @@ export default function Dashboard(): JSX.Element {
       <FingerboardFunctions>
         <Fingerboard handleClick={handleClick} pressed={pressed}></Fingerboard>
         <Arrows>
-          <ArrowButton direction="up"></ArrowButton>
-          <StyledFret start={1} end={4}></StyledFret>
-          <ArrowButton direction="down"></ArrowButton>
+          <ArrowButton
+            direction={true}
+            handleClick={handleFretOffset}
+          ></ArrowButton>
+          <StyledFret start={fretOffset + 1} end={fretOffset + 4}></StyledFret>
+          <ArrowButton
+            direction={false}
+            handleClick={handleFretOffset}
+          ></ArrowButton>
         </Arrows>
       </FingerboardFunctions>
     </StyledMain>

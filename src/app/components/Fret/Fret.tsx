@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import React from 'react'
-import type { ReactNode } from 'react'
 
 export default function Fret({
   start,
@@ -11,7 +10,7 @@ export default function Fret({
 }): JSX.Element {
   return (
     <StyledDiv>
-      Fret: <br />
+      Frets: <br />
       {start} - {end}
     </StyledDiv>
   )
