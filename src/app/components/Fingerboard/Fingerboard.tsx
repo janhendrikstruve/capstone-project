@@ -1,19 +1,25 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Fingerprint } from '../Icons/IconList'
 
 type fingerboardProps = {
   handleClick?: (columnIndex: number, rowIndex: number) => void
   pressed: { e: number; a: number; d: number; g: number; b: number; e2: number }
+  offset: number
 }
 export default function Fingerboard({
   handleClick,
   pressed,
+  offset,
 }: fingerboardProps): JSX.Element {
   const board = Array(6).fill(Array(4).fill(null))
 
-  function renderClicked(columnIndex: number, rowIndex: number): JSX.Element {
-    rowIndex++
+  function renderClicked(
+    columnIndex: number,
+    relativeRowIndex: number
+  ): JSX.Element {
+    const rowIndex = relativeRowIndex + offset + 1
+
     if (columnIndex === 0 && rowIndex === pressed.e) {
       return <PressIcon />
     }
@@ -43,6 +49,7 @@ export default function Fingerboard({
             <XYPosition
               key={rowIndex}
               onClick={() => {
+                console.log(offset)
                 if (handleClick) handleClick(columnIndex, rowIndex)
               }}
             >
@@ -57,14 +64,19 @@ export default function Fingerboard({
 }
 
 const Board = styled.section`
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: 2px;
-    left: 0px;
-    right: 0px;
-    border-top: 3px solid brown;
-  }
+  ${(offset) =>
+    !offset &&
+    css`
+      &:after {
+        content: ' ';
+        position: absolute;
+        top: 2px;
+        left: 0px;
+        right: 0px;
+        border-top: 3px solid brown;
+      }
+    `}
+
   position: relative;
   display: flex;
   flex-direction: row;

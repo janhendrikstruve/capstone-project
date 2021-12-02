@@ -13,20 +13,21 @@ export default function Dashboard(): JSX.Element {
 
   function handleClick(column: number, row: number) {
     const newPressed = { ...pressed }
-    if (column === 0) newPressed.e = ++row
-    if (column === 1) newPressed.a = ++row
-    if (column === 2) newPressed.d = ++row
-    if (column === 3) newPressed.g = ++row
-    if (column === 4) newPressed.b = ++row
-    if (column === 5) newPressed.e2 = ++row
+    const pressedFret = ++row + fretOffset
+    if (column === 0) newPressed.e = pressedFret
+    if (column === 1) newPressed.a = pressedFret
+    if (column === 2) newPressed.d = pressedFret
+    if (column === 3) newPressed.g = pressedFret
+    if (column === 4) newPressed.b = pressedFret
+    if (column === 5) newPressed.e2 = pressedFret
     console.log(newPressed)
     setPressed(newPressed)
   }
 
   function handleFretOffset(direction: boolean) {
     let newFretOffset = fretOffset
-    if (direction && newFretOffset <= 15) newFretOffset++
-    if (!direction && newFretOffset >= 1) newFretOffset--
+    if (direction && newFretOffset >= 1) newFretOffset--
+    if (!direction && newFretOffset <= 15) newFretOffset++
     setFretOffset(newFretOffset)
   }
 
@@ -34,7 +35,11 @@ export default function Dashboard(): JSX.Element {
     <StyledMain>
       <Heading>Note Chord</Heading>
       <FingerboardFunctions>
-        <Fingerboard handleClick={handleClick} pressed={pressed}></Fingerboard>
+        <Fingerboard
+          handleClick={handleClick}
+          pressed={pressed}
+          offset={fretOffset}
+        ></Fingerboard>
         <Arrows>
           <ArrowButton
             direction={true}
