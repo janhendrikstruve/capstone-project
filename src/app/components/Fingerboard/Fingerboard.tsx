@@ -42,7 +42,7 @@ export default function Fingerboard({
     }
   }
   return (
-    <Board>
+    <Board offset={offset}>
       {board.map((column, columnIndex) => (
         <YPosition key={columnIndex}>
           {column.map((_checked: boolean, rowIndex: number) => (
@@ -63,8 +63,8 @@ export default function Fingerboard({
   )
 }
 
-const Board = styled.section`
-  ${(offset) =>
+const Board = styled.section<Partial<fingerboardProps>>`
+  ${({ offset }) =>
     !offset &&
     css`
       &:after {
@@ -74,6 +74,7 @@ const Board = styled.section`
         left: 0px;
         right: 0px;
         border-top: 3px solid brown;
+        pointer-events: none;
       }
     `}
 
