@@ -3,8 +3,12 @@ import ArrowButton from './ArrowButton'
 
 export default {
   title: 'Arrow Button',
-  component: ArrowButton
+  component: ArrowButton,
+}
 
-
-export const up = (): JSX.Element => <ArrowButton direction={true} handleClick={() => void}/>
-export const down = (): JSX.Element => <Arrowbutton direction={false} handleClick={() => void}/>
+export const up = (): JSX.Element => (
+  <ArrowButton direction={true} handleClick={() => undefined} />
+)
+export const down = (): JSX.Element => (
+  <ArrowButton direction={false} handleClick={() => undefined} />
+)
