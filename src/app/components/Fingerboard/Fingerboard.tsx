@@ -84,6 +84,7 @@ const Board = styled.section<Partial<fingerboardProps>>`
   border: 3px solid brown;
   width: fit-content;
   background-color: #202020;
+  border-radius: 2px;
 `
 
 const YPosition = styled.span`
