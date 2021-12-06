@@ -14,12 +14,30 @@ export default function Dashboard(): JSX.Element {
   function handleClick(column: number, row: number) {
     const newPressed = { ...pressed }
     const pressedFret = ++row + fretOffset
-    if (column === 0) newPressed.e = pressedFret
-    if (column === 1) newPressed.a = pressedFret
-    if (column === 2) newPressed.d = pressedFret
-    if (column === 3) newPressed.g = pressedFret
-    if (column === 4) newPressed.b = pressedFret
-    if (column === 5) newPressed.e2 = pressedFret
+    if (column === 0) {
+      if (newPressed.e === pressedFret) newPressed.e = 0
+      else newPressed.e = pressedFret
+    }
+    if (column === 1) {
+      if (newPressed.a === pressedFret) newPressed.a = 0
+      else newPressed.a = pressedFret
+    }
+    if (column === 2) {
+      if (newPressed.d === pressedFret) newPressed.d = 0
+      else newPressed.d = pressedFret
+    }
+    if (column === 3) {
+      if (newPressed.g === pressedFret) newPressed.g = 0
+      else newPressed.g = pressedFret
+    }
+    if (column === 4) {
+      if (newPressed.b === pressedFret) newPressed.b = 0
+      else newPressed.b = pressedFret
+    }
+    if (column === 5) {
+      if (newPressed.e2 === pressedFret) newPressed.e2 = 0
+      else newPressed.e2 = pressedFret
+    }
     setPressed(newPressed)
   }
 
