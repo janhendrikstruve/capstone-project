@@ -6,10 +6,29 @@ import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
 import FretCounter from '../../components/Fret/FretCounter'
 import ArrowButton from '../../components/ArrowButton/ArrowButton'
+import { Plus } from '../../components/Icons/IconList'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(fingerboardData)
   const [fretOffset, setFretOffset] = useState(0)
+  const [savedChords, setSavedChords] = useState([
+    {
+      e2: 1,
+      b: 4,
+      g: 3,
+      d: 2,
+      a: 0,
+      e: 1,
+    },
+    {
+      e2: 1,
+      b: 4,
+      g: 3,
+      d: 2,
+      a: 0,
+      e: 1,
+    },
+  ])
 
   function handleClick(column: number, row: number) {
     const newPressed = { ...pressed }
@@ -48,6 +67,27 @@ export default function Dashboard(): JSX.Element {
     setFretOffset(newFretOffset)
   }
 
+  function handleSafe() {
+    //  const newSavedChords = [...pressed, savedChords]
+    // console.log(newSavedChords)
+  }
+
+  function renderSavedChords() {
+    console.log(savedChords)
+    if (savedChords)
+      return savedChords.map(
+        (chord: {
+          e: number
+          a: number
+          d: number
+          g: number
+          b: number
+          e2: number
+        }) => <Fingerboard pressed={chord} offset={0} />
+      )
+    else return <></>
+  }
+
   return (
     <StyledMain>
       <Heading>Note Chord</Heading>
@@ -69,6 +109,10 @@ export default function Dashboard(): JSX.Element {
           ></ArrowButton>
         </Arrows>
       </FingerboardFunctions>
+      <SafeButton onClick={handleSafe}>
+        <Plus />
+      </SafeButton>
+      {renderSavedChords()}
     </StyledMain>
   )
 }
@@ -88,4 +132,15 @@ const Arrows = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`
+
+const SafeButton = styled.button`
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  width: 50px;
 `
