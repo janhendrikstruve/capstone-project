@@ -1,10 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Fingerprint } from '../Icons/IconList'
+import type { Thing } from '../../types'
 
 type fingerboardProps = {
   handleClick?: (columnIndex: number, rowIndex: number) => void
-  pressed: { e: number; a: number; d: number; g: number; b: number; e2: number }
+  pressed: Thing
   offset: number
 }
 export default function Fingerboard({
