@@ -52,7 +52,7 @@ export default function Dashboard(): JSX.Element {
   }
 
   function handleSafe() {
-    const newSavedChords = [{ ...pressed }, ...savedChords]
+    const newSavedChords = [pressed, ...savedChords]
     setSavedChords(newSavedChords)
   }
 
