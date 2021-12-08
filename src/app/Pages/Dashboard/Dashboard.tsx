@@ -57,7 +57,6 @@ export default function Dashboard(): JSX.Element {
   }
 
   function renderSavedChords() {
-    console.log(savedChords)
     if (savedChords)
       return savedChords.map((chord: Thing) => (
         <Fingerboard pressed={chord} offset={0} />
