@@ -7,12 +7,12 @@ import styled from 'styled-components'
 import FretCounter from '../../components/Fret/FretCounter'
 import ArrowButton from '../../components/ArrowButton/ArrowButton'
 import { Plus } from '../../components/Icons/IconList'
-import type { Thing } from '../../types'
+import type { fingerboardDataType } from '../../types'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(fingerboardData)
   const [fretOffset, setFretOffset] = useState(0)
-  const [savedChords, setSavedChords] = useState<Thing[]>([])
+  const [savedChords, setSavedChords] = useState<fingerboardDataType[]>([])
 
   function handleClick(column: number, row: number) {
     const newPressed = { ...pressed }
@@ -51,14 +51,14 @@ export default function Dashboard(): JSX.Element {
     setFretOffset(newFretOffset)
   }
 
-  function handleSafe() {
+  function handleSafe(event: React.FormEvent<HTMLFormElement>) {
     const newSavedChords = [pressed, ...savedChords]
     setSavedChords(newSavedChords)
   }
 
   function renderSavedChords() {
     if (savedChords)
-      return savedChords.map((chord: Thing) => (
+      return savedChords.map((chord: fingerboardDataType) => (
         <Fingerboard pressed={chord} offset={0} />
       ))
     else return <></>
