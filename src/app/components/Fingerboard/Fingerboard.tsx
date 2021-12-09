@@ -1,10 +1,11 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { Fingerprint } from '../Icons/IconList'
+import type { fingerboardDataType } from '../../types'
 
 type fingerboardProps = {
   handleClick?: (columnIndex: number, rowIndex: number) => void
-  pressed: { e: number; a: number; d: number; g: number; b: number; e2: number }
+  pressed: fingerboardDataType
   offset: number
 }
 export default function Fingerboard({
@@ -84,6 +85,7 @@ const Board = styled.section<Partial<fingerboardProps>>`
   border: 3px solid brown;
   width: fit-content;
   background-color: #202020;
+  border-radius: 2px;
 `
 
 const YPosition = styled.span`
