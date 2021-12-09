@@ -89,19 +89,19 @@ export default function Dashboard(): JSX.Element {
       <Heading>Note Chord</Heading>
       <FingerboardFunctions>
         <Fingerboard
-          handleClick={handleClick}
+            onClick={handleClick}
           pressed={pressed}
           offset={fretOffset}
         ></Fingerboard>
         <Arrows>
           <ArrowButton
             direction={true}
-            handleClick={handleFretOffset}
+              onClick={handleFretOffset}
           ></ArrowButton>
           <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
           <ArrowButton
             direction={false}
-            handleClick={handleFretOffset}
+              onClick={handleFretOffset}
           ></ArrowButton>
         </Arrows>
       </FingerboardFunctions>

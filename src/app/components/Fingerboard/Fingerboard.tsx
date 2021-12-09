@@ -4,12 +4,12 @@ import { Fingerprint } from '../Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 
 type fingerboardProps = {
-  handleClick?: (columnIndex: number, rowIndex: number) => void
+  onClick?: (columnIndex: number, rowIndex: number) => void
   pressed: fingerboardDataType
   offset: number
 }
 export default function Fingerboard({
-  handleClick,
+  onClick,
   pressed,
   offset,
 }: fingerboardProps): JSX.Element {
@@ -51,7 +51,7 @@ export default function Fingerboard({
               key={rowIndex}
               onClick={() => {
                 console.log(offset)
-                if (handleClick) handleClick(columnIndex, rowIndex)
+                if (onClick) onClick(columnIndex, rowIndex)
               }}
             >
               <Guitarstring></Guitarstring>
