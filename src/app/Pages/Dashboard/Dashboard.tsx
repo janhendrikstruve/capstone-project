@@ -12,7 +12,13 @@ import type { fingerboardDataType } from '../../types'
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(fingerboardData)
   const [fretOffset, setFretOffset] = useState(0)
-  const [savedChords, setSavedChords] = useState<fingerboardDataType[]>([])
+  const [savedChords, setSavedChords] = useState<
+    {
+      chord: fingerboardDataType
+      name: string
+    }[]
+  >([])
+  const [chordInput, setChordInput] = useState('')
 
   function handleClick(column: number, row: number) {
     const newPressed = { ...pressed }
@@ -52,16 +58,30 @@ export default function Dashboard(): JSX.Element {
   }
 
   function handleSafe(event: React.FormEvent<HTMLFormElement>) {
-    const newSavedChords = [pressed, ...savedChords]
-    setSavedChords(newSavedChords)
+    event.preventDefault()
+    const newChord = {
+      chord: pressed,
+      name: chordInput,
+    }
+
+    const oldChords = savedChords
+    setSavedChords([...oldChords, newChord])
   }
 
   function renderSavedChords() {
-    if (savedChords)
-      return savedChords.map((chord: fingerboardDataType) => (
-        <Fingerboard pressed={chord} offset={0} />
-      ))
-    else return <></>
+    console.log(savedChords)
+    return savedChords ? (
+      savedChords.map(
+        ({ chord, name }: { chord: fingerboardDataType; name: string }) => (
+          <>
+            <ChordName>{name}</ChordName>
+            <Fingerboard pressed={chord} offset={fretOffset} />
+          </>
+        )
+      )
+    ) : (
+      <></>
+    )
   }
 
   return (
@@ -85,9 +105,21 @@ export default function Dashboard(): JSX.Element {
           ></ArrowButton>
         </Arrows>
       </FingerboardFunctions>
-      <SafeButton onClick={handleSafe}>
-        <Plus />
-      </SafeButton>
+      <form onSubmit={handleSafe}>
+        <label htmlFor="chords" />
+        <input
+          type="text"
+          id="chords"
+          onChange={(event) => setChordInput(event.target.value)}
+          placeholder="Chord Name here"
+          value={chordInput}
+        />
+        <br />
+        <SafeButton>
+          <Plus />
+        </SafeButton>
+      </form>
+
       {renderSavedChords()}
     </StyledMain>
   )
@@ -119,3 +151,5 @@ const SafeButton = styled.button`
   outline: inherit;
   width: 50px;
 `
+
+const ChordName = styled.h2``
