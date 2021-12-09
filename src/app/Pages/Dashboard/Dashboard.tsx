@@ -112,7 +112,6 @@ const Arrows = styled.div`
 
 const SafeButton = styled.button`
   background: none;
-  color: inherit;
   border: none;
   padding: 0;
   font: inherit;
