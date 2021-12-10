@@ -27,5 +27,5 @@ const StyledButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-  width: 50px;
+  width: 40px;
 `
