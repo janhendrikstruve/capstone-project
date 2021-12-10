@@ -70,23 +70,39 @@ export default function Dashboard(): JSX.Element {
 
   function renderSavedChords() {
     console.log(savedChords)
-    return savedChords ? (
+    return (
+      savedChords &&
       savedChords.map(
-        ({ chord, name }: { chord: fingerboardDataType; name: string }) => (
+        ({
+          chord,
+          name,
+          offset,
+        }: {
+          chord: fingerboardDataType
+          name: string
+          offset: number
+        }) => (
           <>
             <ChordName>{name}</ChordName>
-            <Fingerboard pressed={chord} offset={fretOffset} />
+            <Fingerboard pressed={chord} offset={offset} />
           </>
         )
       )
-    ) : (
-      <></>
     )
   }
 
   return (
     <StyledMain>
       <Heading>Note Chord</Heading>
+      <ChordForm onSubmit={handleSafe}>
+        <ChordNameInput
+          type="text"
+          id="chords"
+          onChange={(event) => setChordInput(event.target.value)}
+          placeholder="Name"
+          value={chordInput}
+        />
+        <br />
       <FingerboardFunctions>
         <Fingerboard
             onClick={handleClick}
@@ -105,20 +121,13 @@ export default function Dashboard(): JSX.Element {
           ></ArrowButton>
         </Arrows>
       </FingerboardFunctions>
-      <form onSubmit={handleSafe}>
+
         <label htmlFor="chords" />
-        <input
-          type="text"
-          id="chords"
-          onChange={(event) => setChordInput(event.target.value)}
-          placeholder="Chord Name here"
-          value={chordInput}
-        />
-        <br />
+
         <SafeButton>
           <Plus />
         </SafeButton>
-      </form>
+      </ChordForm>
 
       {renderSavedChords()}
     </StyledMain>
@@ -128,17 +137,16 @@ export default function Dashboard(): JSX.Element {
 const StyledMain = styled.main`
   display: grid;
   justify-items: center;
-  grid-template-rows: auto auto;
   grid-gap: 16px;
 `
 
 const FingerboardFunctions = styled.div`
   display: flex;
+  flex-direction: column;
 `
 
 const Arrows = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
 `
 
@@ -153,3 +161,12 @@ const SafeButton = styled.button`
 `
 
 const ChordName = styled.h2``
+
+const ChordForm = styled.form`
+  display: grid;
+  justify-items: center;
+`
+
+const ChordNameInput = styled.input`
+  width: 120px;
+`

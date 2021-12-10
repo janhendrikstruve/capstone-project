@@ -7,10 +7,13 @@ export default function ArrowButton({
   onClick,
 }: {
   direction: boolean
-  onClick: (direction: boolean) => void
+  onClick: (
+    direction: boolean,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => void
 }): JSX.Element {
   return (
-    <StyledButton onClick={() => handleClick(direction)}>
+    <StyledButton onClick={(event) => onClick(direction, event)}>
       {direction ? <ArrowUp /> : <ArrowDown />}
     </StyledButton>
   )
