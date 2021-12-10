@@ -7,8 +7,8 @@ export default {
 }
 
 export const up = (): JSX.Element => (
-  <ArrowButton direction={true} handleClick={() => undefined} />
+  <ArrowButton direction={true} onClick={() => undefined} />
 )
 export const down = (): JSX.Element => (
-  <ArrowButton direction={false} handleClick={() => undefined} />
+  <ArrowButton direction={false} onClick={() => undefined} />
 )
