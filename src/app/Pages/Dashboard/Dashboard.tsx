@@ -16,6 +16,7 @@ export default function Dashboard(): JSX.Element {
     {
       chord: fingerboardDataType
       name: string
+      offset: number
     }[]
   >([])
   const [chordInput, setChordInput] = useState('')
@@ -50,7 +51,11 @@ export default function Dashboard(): JSX.Element {
     setPressed(newPressed)
   }
 
-  function handleFretOffset(direction: boolean) {
+  function handleFretOffset(
+    direction: boolean,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) {
+    event.preventDefault()
     let newFretOffset = fretOffset
     if (direction && newFretOffset >= 1) newFretOffset--
     if (!direction && newFretOffset <= 15) newFretOffset++
@@ -62,10 +67,10 @@ export default function Dashboard(): JSX.Element {
     const newChord = {
       chord: pressed,
       name: chordInput,
+      offset: fretOffset,
     }
-
     const oldChords = savedChords
-    setSavedChords([...oldChords, newChord])
+    setSavedChords([newChord, ...oldChords])
   }
 
   function renderSavedChords() {
@@ -103,24 +108,24 @@ export default function Dashboard(): JSX.Element {
           value={chordInput}
         />
         <br />
-      <FingerboardFunctions>
-        <Fingerboard
+        <FingerboardFunctions>
+          <Fingerboard
             onClick={handleClick}
-          pressed={pressed}
-          offset={fretOffset}
-        ></Fingerboard>
-        <Arrows>
-          <ArrowButton
-            direction={true}
+            pressed={pressed}
+            offset={fretOffset}
+          ></Fingerboard>
+          <Arrows>
+            <ArrowButton
+              direction={true}
               onClick={handleFretOffset}
-          ></ArrowButton>
-          <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
-          <ArrowButton
-            direction={false}
+            ></ArrowButton>
+            <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
+            <ArrowButton
+              direction={false}
               onClick={handleFretOffset}
-          ></ArrowButton>
-        </Arrows>
-      </FingerboardFunctions>
+            ></ArrowButton>
+          </Arrows>
+        </FingerboardFunctions>
 
         <label htmlFor="chords" />
 
