@@ -106,5 +106,5 @@ const PressIcon = styled(Fingerprint)`
   z-index: 100;
   left: 0;
   right: 0;
-  top: 0.6rem;
+  top: 10px;
 `
