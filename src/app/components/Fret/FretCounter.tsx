@@ -10,17 +10,14 @@ export default function FretCounter({
 }): JSX.Element {
   return (
     <StyledDiv>
-      Frets: <br />
+      Frets:
       {start} - {end}
     </StyledDiv>
   )
 }
 
 const StyledDiv = styled.div`
-  border: 1px solid steelblue;
-  display: inline-block;
   align-self: center;
-  padding: 2px 2px;
-  border-radius: 4px;
-  background-color: #fff459;
+  font-weight: bold;
+  color: brown;
 `

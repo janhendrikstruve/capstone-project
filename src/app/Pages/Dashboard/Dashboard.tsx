@@ -109,6 +109,7 @@ export default function Dashboard(): JSX.Element {
         />
         <br />
         <FingerboardFunctions>
+          <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
           <Fingerboard
             onClick={handleClick}
             pressed={pressed}
@@ -119,7 +120,7 @@ export default function Dashboard(): JSX.Element {
               direction={true}
               onClick={handleFretOffset}
             ></ArrowButton>
-            <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
+
             <ArrowButton
               direction={false}
               onClick={handleFretOffset}
