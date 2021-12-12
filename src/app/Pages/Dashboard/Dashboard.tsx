@@ -89,6 +89,7 @@ export default function Dashboard(): JSX.Element {
         }) => (
           <>
             <ChordName>{name}</ChordName>
+            <FretCounter start={offset + 1} end={offset + 4} />
             <Fingerboard pressed={chord} offset={offset} />
           </>
         )
