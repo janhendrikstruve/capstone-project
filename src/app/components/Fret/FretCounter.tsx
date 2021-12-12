@@ -9,14 +9,14 @@ export default function FretCounter({
   end: number
 }): JSX.Element {
   return (
-    <StyledDiv>
+    <Counter>
       Frets:
       {start} - {end}
-    </StyledDiv>
+    </Counter>
   )
 }
 
-const StyledDiv = styled.div`
+const Counter = styled.div`
   align-self: center;
   font-weight: bold;
   color: brown;

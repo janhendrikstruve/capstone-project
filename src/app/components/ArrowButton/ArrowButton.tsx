@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ArrowDown, ArrowUp } from '../Icons/Arrows'
+import { ArrowDownIcon, ArrowUpIcon } from '../Icons/Arrows'
 
 export default function ArrowButton({
   direction,
@@ -14,7 +14,7 @@ export default function ArrowButton({
 }): JSX.Element {
   return (
     <StyledButton onClick={(event) => onClick(direction, event)}>
-      {direction ? <ArrowUp /> : <ArrowDown />}
+      {direction ? <ArrowUpIcon /> : <ArrowDownIcon />}
     </StyledButton>
   )
 }

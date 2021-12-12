@@ -1,6 +1,8 @@
 import React from 'react'
 
-export function ArrowDown(props: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function ArrowDownIcon(
+  props: React.SVGProps<SVGSVGElement>
+): JSX.Element {
   return (
     <svg
       className="w-6 h-6"
@@ -18,7 +20,7 @@ export function ArrowDown(props: React.SVGProps<SVGSVGElement>): JSX.Element {
   )
 }
 
-export function ArrowUp(props: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function ArrowUpIcon(props: React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       className="w-6 h-6"

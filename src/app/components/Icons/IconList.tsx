@@ -1,14 +1,14 @@
 import React from 'react'
 export const IconArray = [
-  Fingerprint,
-  Heart,
-  LightningBolt,
-  MusicNote,
-  Star,
-  Code,
+  FingerprintIcon,
+  HeartIcon,
+  LightningBoltIcon,
+  MusicNoteIcon,
+  StarIcon,
+  CodeIcon,
 ]
 
-export function Fingerprint(
+export function FingerprintIcon(
   props?: React.SVGProps<SVGSVGElement>
 ): JSX.Element {
   return (
@@ -32,7 +32,7 @@ export function Fingerprint(
   )
 }
 
-export function Heart(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function HeartIcon(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" {...props}>
       <path
@@ -44,7 +44,7 @@ export function Heart(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   )
 }
 
-export function LightningBolt(
+export function LightningBoltIcon(
   props?: React.SVGProps<SVGSVGElement>
 ): JSX.Element {
   return (
@@ -58,7 +58,9 @@ export function LightningBolt(
   )
 }
 
-export function MusicNote(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function MusicNoteIcon(
+  props?: React.SVGProps<SVGSVGElement>
+): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" {...props}>
       <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"></path>
@@ -66,7 +68,7 @@ export function MusicNote(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   )
 }
 
-export function Star(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function StarIcon(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" {...props}>
       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
@@ -74,7 +76,7 @@ export function Star(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   )
 }
 
-export function Code(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function CodeIcon(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" {...props}>
       <path
@@ -86,7 +88,7 @@ export function Code(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   )
 }
 
-export function Plus(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
+export function PlusIcon(props?: React.SVGProps<SVGSVGElement>): JSX.Element {
   return (
     <svg
       className="w-6 h-6"

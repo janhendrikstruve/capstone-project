@@ -1,6 +1,6 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Fingerprint } from '../Icons/IconList'
+import { FingerprintIcon } from '../Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 
 type fingerboardProps = {
@@ -101,7 +101,7 @@ const Guitarstring = styled.div`
   padding: 20px 0;
   border: 1px solid #b47601;
 `
-const PressIcon = styled(Fingerprint)`
+const PressIcon = styled(FingerprintIcon)`
   position: absolute;
   z-index: 100;
   left: 0;

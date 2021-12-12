@@ -6,7 +6,7 @@ import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
 import FretCounter from '../../components/Fret/FretCounter'
 import ArrowButton from '../../components/ArrowButton/ArrowButton'
-import { Plus } from '../../components/Icons/IconList'
+import { PlusIcon } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 
 export default function Dashboard(): JSX.Element {
@@ -99,8 +99,9 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <StyledMain>
-      <Heading>Note Chord</Heading>
+      <Heading>Save Chord</Heading>
       <ChordForm onSubmit={handleSafe}>
+        <label htmlFor="chords" />
         <ChordNameInput
           type="text"
           id="chords"
@@ -108,7 +109,6 @@ export default function Dashboard(): JSX.Element {
           placeholder="Name"
           value={chordInput}
         />
-        <br />
         <FingerboardFunctions>
           <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
           <Fingerboard
@@ -116,26 +116,21 @@ export default function Dashboard(): JSX.Element {
             pressed={pressed}
             offset={fretOffset}
           ></Fingerboard>
-          <Arrows>
+          <Buttons>
             <ArrowButton
               direction={true}
               onClick={handleFretOffset}
             ></ArrowButton>
-
+            <SafeButton>
+              <PlusIcon />
+            </SafeButton>
             <ArrowButton
               direction={false}
               onClick={handleFretOffset}
             ></ArrowButton>
-          </Arrows>
+          </Buttons>
         </FingerboardFunctions>
-
-        <label htmlFor="chords" />
-
-        <SafeButton>
-          <Plus />
-        </SafeButton>
       </ChordForm>
-
       {renderSavedChords()}
     </StyledMain>
   )
@@ -152,7 +147,7 @@ const FingerboardFunctions = styled.div`
   flex-direction: column;
 `
 
-const Arrows = styled.div`
+const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
 `
@@ -161,13 +156,14 @@ const SafeButton = styled.button`
   background: none;
   border: none;
   padding: 0;
-  font: inherit;
   cursor: pointer;
-  outline: inherit;
   width: 50px;
 `
 
-const ChordName = styled.h2``
+const ChordName = styled.h2`
+  color: brown;
+
+`
 
 const ChordForm = styled.form`
   display: grid;
@@ -176,4 +172,7 @@ const ChordForm = styled.form`
 
 const ChordNameInput = styled.input`
   width: 120px;
+  border: 2px solid brown;
+  border-radius: 2px;
+  background-color: #ffddbd;
 `
