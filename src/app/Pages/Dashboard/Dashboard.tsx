@@ -77,7 +77,8 @@ export default function Dashboard(): JSX.Element {
     return (
       savedChords &&
       savedChords.map(
-        ({
+        (
+          {
           chord,
           name,
           offset,
@@ -85,12 +86,14 @@ export default function Dashboard(): JSX.Element {
           chord: fingerboardDataType
           name: string
           offset: number
-        }) => (
-          <>
+          },
+          index
+        ) => (
+          <li key={index}>
             <ChordName>{name}</ChordName>
             <FretCounter start={offset + 1} end={offset + 4} />
             <Fingerboard pressed={chord} offset={offset} />
-          </>
+          </li>
         )
       )
     )
@@ -130,7 +133,7 @@ export default function Dashboard(): JSX.Element {
           </Buttons>
         </FingerboardFunctions>
       </ChordForm>
-      {renderSavedChords()}
+      <ChordList role="list">{renderSavedChords()}</ChordList>
     </StyledMain>
   )
 }
@@ -173,4 +176,6 @@ const ChordNameInput = styled.input`
   border: 2px solid brown;
   border-radius: 2px;
   background-color: #ffddbd;
+const ChordList = styled.ul`
+  padding: 0;
 `
