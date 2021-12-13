@@ -21,7 +21,7 @@ export default function Dashboard(): JSX.Element {
   >([])
   const [chordInput, setChordInput] = useState('')
 
-  function handleClick(column: number, row: number) {
+  function handleStringClick(column: number, row: number) {
     const newPressed = { ...pressed }
     const pressedFret = ++row + fretOffset
     if (column === 0) {
@@ -112,7 +112,7 @@ export default function Dashboard(): JSX.Element {
         <FingerboardFunctions>
           <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
           <Fingerboard
-            onClick={handleClick}
+            onClick={handleStringClick}
             pressed={pressed}
             offset={fretOffset}
           ></Fingerboard>
@@ -162,7 +162,6 @@ const SafeButton = styled.button`
 
 const ChordName = styled.h2`
   color: brown;
-
 `
 
 const ChordForm = styled.form`
