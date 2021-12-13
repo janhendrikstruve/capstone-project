@@ -62,15 +62,24 @@ export default function Dashboard(): JSX.Element {
     setFretOffset(newFretOffset)
   }
 
+  function isStringPressed() {
+    if (Object.values(pressed).find((string) => string > 0)) return true
+    return false
+  }
+
   function handleSafe(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
-    const newChord = {
-      chord: pressed,
-      name: chordInput,
-      offset: fretOffset,
-    }
-    const oldChords = savedChords
-    setSavedChords([newChord, ...oldChords])
+    if (chordInput && isStringPressed()) {
+      const newChord = {
+        chord: pressed,
+        name: chordInput,
+        offset: fretOffset,
+      }
+      const newSavedChords = [newChord, ...savedChords]
+      setSavedChords(newSavedChords)
+    } else if (chordInput.length) alert('Press at least one String')
+    else if (isStringPressed()) alert('Give your Chord a Name')
+    else alert('Give your Chord a Name and press at least one String')
   }
 
   function renderSavedChords() {
@@ -79,13 +88,13 @@ export default function Dashboard(): JSX.Element {
       savedChords.map(
         (
           {
-          chord,
-          name,
-          offset,
-        }: {
-          chord: fingerboardDataType
-          name: string
-          offset: number
+            chord,
+            name,
+            offset,
+          }: {
+            chord: fingerboardDataType
+            name: string
+            offset: number
           },
           index
         ) => (
@@ -110,6 +119,7 @@ export default function Dashboard(): JSX.Element {
           onChange={(event) => setChordInput(event.target.value)}
           placeholder="Name"
           value={chordInput}
+          maxLength={10}
         />
         <FingerboardFunctions>
           <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
@@ -124,7 +134,9 @@ export default function Dashboard(): JSX.Element {
               onClick={handleFretOffset}
             ></ArrowButton>
             <SafeButton>
-              <PlusIcon />
+              <PlusIcon
+                fill={!chordInput || !isStringPressed() ? '#8d8d8d' : 'inherit'}
+              />
             </SafeButton>
             <ArrowButton
               direction={false}
@@ -176,6 +188,9 @@ const ChordNameInput = styled.input`
   border: 2px solid brown;
   border-radius: 2px;
   background-color: #ffddbd;
+  text-align: center;
+`
+
 const ChordList = styled.ul`
   padding: 0;
 `
