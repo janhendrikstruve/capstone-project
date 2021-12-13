@@ -50,7 +50,6 @@ export default function Fingerboard({
             <XYPosition
               key={rowIndex}
               onClick={() => {
-                console.log(offset)
                 if (onClick) onClick(columnIndex, rowIndex)
               }}
             >

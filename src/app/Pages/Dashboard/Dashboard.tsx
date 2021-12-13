@@ -74,7 +74,6 @@ export default function Dashboard(): JSX.Element {
   }
 
   function renderSavedChords() {
-    console.log(savedChords)
     return (
       savedChords &&
       savedChords.map(
