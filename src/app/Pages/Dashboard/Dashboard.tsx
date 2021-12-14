@@ -5,8 +5,11 @@ import { fingerboardData } from '../../data/fingerboardData/fingerboardData'
 import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
 import FretCounter from '../../components/Fret/FretCounter'
-import ArrowButton from '../../components/ArrowButton/ArrowButton'
-import { PlusIcon } from '../../components/Icons/IconList'
+import {
+  PlusIcon,
+  ArrowDownIcon,
+  ArrowUpIcon,
+} from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 
 export default function Dashboard(): JSX.Element {
@@ -52,8 +55,8 @@ export default function Dashboard(): JSX.Element {
   }
 
   function handleFretOffset(
-    direction: boolean,
-    event: React.MouseEvent<HTMLButtonElement>
+    event: React.MouseEvent<HTMLButtonElement>,
+    direction: boolean
   ) {
     event.preventDefault()
     let newFretOffset = fretOffset
@@ -129,19 +132,17 @@ export default function Dashboard(): JSX.Element {
             offset={fretOffset}
           ></Fingerboard>
           <Buttons>
-            <ArrowButton
-              direction={true}
-              onClick={handleFretOffset}
-            ></ArrowButton>
-            <SafeButton>
+            <ArrowButton onClick={(event) => handleFretOffset(event, true)}>
+              <ArrowUpIcon />
+            </ArrowButton>
+            <Button>
               <PlusIcon
-                fill={!chordInput || !isStringPressed() ? '#8d8d8d' : 'inherit'}
+                fill={!chordInput || !isStringPressed() ? '#8d8d8d' : 'brown'}
               />
-            </SafeButton>
-            <ArrowButton
-              direction={false}
-              onClick={handleFretOffset}
-            ></ArrowButton>
+            </Button>
+            <ArrowButton onClick={(event) => handleFretOffset(event, false)}>
+              <ArrowDownIcon />
+            </ArrowButton>
           </Buttons>
         </FingerboardFunctions>
       </ChordForm>
@@ -166,12 +167,16 @@ const Buttons = styled.div`
   justify-content: space-between;
 `
 
-const SafeButton = styled.button`
+const Button = styled.button`
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   width: 50px;
+`
+
+const ArrowButton = styled(Button)`
+  width: 40px;
 `
 
 const ChordName = styled.h2`
