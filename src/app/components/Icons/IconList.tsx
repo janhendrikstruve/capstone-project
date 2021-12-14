@@ -143,4 +143,3 @@ export function ArrowUpIcon(props: React.SVGProps<SVGSVGElement>): JSX.Element {
     </svg>
   )
 }
-
