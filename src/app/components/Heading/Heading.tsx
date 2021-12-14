@@ -11,6 +11,7 @@ export default function Heading({
 }
 
 const StyledH1 = styled.h1`
+  color: #111;
   text-transform: uppercase;
   width: 100%;
   text-align: center;
