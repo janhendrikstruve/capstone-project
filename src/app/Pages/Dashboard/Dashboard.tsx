@@ -113,7 +113,7 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <StyledMain>
-      <Heading>Save Chord</Heading>
+      <Heading>marf</Heading>
       <ChordForm onSubmit={handleSafe}>
         <label htmlFor="chords" />
         <ChordNameInput
@@ -133,15 +133,15 @@ export default function Dashboard(): JSX.Element {
           ></Fingerboard>
           <Buttons>
             <ArrowButton onClick={(event) => handleFretOffset(event, true)}>
-              <ArrowUpIcon />
+              <ArrowUpIcon fill='brown' />
             </ArrowButton>
             <Button>
               <PlusIcon
-                fill={!chordInput || !isStringPressed() ? '#8d8d8d' : 'brown'}
+                fill={!chordInput || !isStringPressed() ? '#6a6a6a' : 'brown'}
               />
             </Button>
             <ArrowButton onClick={(event) => handleFretOffset(event, false)}>
-              <ArrowDownIcon />
+              <ArrowDownIcon fill='brown' />
             </ArrowButton>
           </Buttons>
         </FingerboardFunctions>
