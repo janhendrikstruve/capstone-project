@@ -16,4 +16,5 @@ const StyledH1 = styled.h1`
   width: 100%;
   text-align: center;
   background-color: #fff459;
+  margin-bottom: 30px;
 `
