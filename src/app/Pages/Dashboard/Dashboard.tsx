@@ -1,5 +1,4 @@
 import React from 'react'
-import { useState } from 'react'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import { fingerboardData } from '../../data/fingerboardData/fingerboardData'
 import Heading from '../../components/Heading/Heading'
@@ -11,18 +10,22 @@ import {
   ArrowUpIcon,
 } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
+import useStickyState from '../../components/hooks/stickystate'
 
 export default function Dashboard(): JSX.Element {
-  const [pressed, setPressed] = useState(fingerboardData)
-  const [fretOffset, setFretOffset] = useState(0)
-  const [savedChords, setSavedChords] = useState<
+  const [pressed, setPressed] = useStickyState(
+    fingerboardData,
+    'fingerboardData'
+  )
+  const [fretOffset, setFretOffset] = useStickyState(0, 'fretOffset')
+  const [savedChords, setSavedChords] = useStickyState<
     {
       chord: fingerboardDataType
       name: string
       offset: number
     }[]
-  >([])
-  const [chordInput, setChordInput] = useState('')
+  >([], 'savedChords')
+  const [chordInput, setChordInput] = useStickyState('', 'chordInput')
 
   function handleStringClick(column: number, row: number) {
     const newPressed = { ...pressed }
@@ -78,7 +81,7 @@ export default function Dashboard(): JSX.Element {
         name: chordInput,
         offset: fretOffset,
       }
-      setSavedChords((prev) => [newChord, ...prev])
+      setSavedChords([newChord, ...savedChords])
     } else if (chordInput.length) alert('Press at least one String')
     else if (isStringPressed()) alert('Give your Chord a Name')
     else alert('Give your Chord a Name and press at least one String')
@@ -98,7 +101,7 @@ export default function Dashboard(): JSX.Element {
             name: string
             offset: number
           },
-          index
+          index: number
         ) => (
           <li key={index}>
             <ChordName>{name}</ChordName>
