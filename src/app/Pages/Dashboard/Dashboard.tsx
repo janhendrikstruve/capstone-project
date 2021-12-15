@@ -78,8 +78,7 @@ export default function Dashboard(): JSX.Element {
         name: chordInput,
         offset: fretOffset,
       }
-      const newSavedChords = [newChord, ...savedChords]
-      setSavedChords(newSavedChords)
+      setSavedChords((prev) => [newChord, ...prev])
     } else if (chordInput.length) alert('Press at least one String')
     else if (isStringPressed()) alert('Give your Chord a Name')
     else alert('Give your Chord a Name and press at least one String')
