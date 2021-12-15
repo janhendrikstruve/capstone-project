@@ -1,15 +1,15 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Fingerprint } from '../Icons/IconList'
+import { FingerprintIcon } from '../Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 
 type fingerboardProps = {
-  handleClick?: (columnIndex: number, rowIndex: number) => void
+  onClick?: (columnIndex: number, rowIndex: number) => void
   pressed: fingerboardDataType
   offset: number
 }
 export default function Fingerboard({
-  handleClick,
+  onClick,
   pressed,
   offset,
 }: fingerboardProps): JSX.Element {
@@ -50,8 +50,7 @@ export default function Fingerboard({
             <XYPosition
               key={rowIndex}
               onClick={() => {
-                console.log(offset)
-                if (handleClick) handleClick(columnIndex, rowIndex)
+                if (onClick) onClick(columnIndex, rowIndex)
               }}
             >
               <Guitarstring></Guitarstring>
@@ -101,10 +100,10 @@ const Guitarstring = styled.div`
   padding: 20px 0;
   border: 1px solid #b47601;
 `
-const PressIcon = styled(Fingerprint)`
+const PressIcon = styled(FingerprintIcon)`
   position: absolute;
   z-index: 100;
   left: 0;
   right: 0;
-  top: 0.6rem;
+  top: 10px;
 `

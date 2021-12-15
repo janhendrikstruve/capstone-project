@@ -6,15 +6,22 @@ import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
 import FretCounter from '../../components/Fret/FretCounter'
 import ArrowButton from '../../components/ArrowButton/ArrowButton'
-import { Plus } from '../../components/Icons/IconList'
+import { PlusIcon } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useState(fingerboardData)
   const [fretOffset, setFretOffset] = useState(0)
-  const [savedChords, setSavedChords] = useState<fingerboardDataType[]>([])
+  const [savedChords, setSavedChords] = useState<
+    {
+      chord: fingerboardDataType
+      name: string
+      offset: number
+    }[]
+  >([])
+  const [chordInput, setChordInput] = useState('')
 
-  function handleClick(column: number, row: number) {
+  function handleStringClick(column: number, row: number) {
     const newPressed = { ...pressed }
     const pressedFret = ++row + fretOffset
     if (column === 0) {
@@ -44,51 +51,100 @@ export default function Dashboard(): JSX.Element {
     setPressed(newPressed)
   }
 
-  function handleFretOffset(direction: boolean) {
+  function handleFretOffset(
+    direction: boolean,
+    event: React.MouseEvent<HTMLButtonElement>
+  ) {
+    event.preventDefault()
     let newFretOffset = fretOffset
     if (direction && newFretOffset >= 1) newFretOffset--
     if (!direction && newFretOffset <= 15) newFretOffset++
     setFretOffset(newFretOffset)
   }
 
+  function isStringPressed() {
+    if (Object.values(pressed).find((string) => string > 0)) return true
+    return false
+  }
+
   function handleSafe(event: React.FormEvent<HTMLFormElement>) {
-    const newSavedChords = [pressed, ...savedChords]
-    setSavedChords(newSavedChords)
+    event.preventDefault()
+    if (chordInput && isStringPressed()) {
+      const newChord = {
+        chord: pressed,
+        name: chordInput,
+        offset: fretOffset,
+      }
+      setSavedChords((prev) => [newChord, ...prev])
+    } else if (chordInput.length) alert('Press at least one String')
+    else if (isStringPressed()) alert('Give your Chord a Name')
+    else alert('Give your Chord a Name and press at least one String')
   }
 
   function renderSavedChords() {
-    if (savedChords)
-      return savedChords.map((chord: fingerboardDataType) => (
-        <Fingerboard pressed={chord} offset={0} />
-      ))
-    else return <></>
+    return (
+      savedChords &&
+      savedChords.map(
+        (
+          {
+            chord,
+            name,
+            offset,
+          }: {
+            chord: fingerboardDataType
+            name: string
+            offset: number
+          },
+          index
+        ) => (
+          <li key={index}>
+            <ChordName>{name}</ChordName>
+            <FretCounter start={offset + 1} end={offset + 4} />
+            <Fingerboard pressed={chord} offset={offset} />
+          </li>
+        )
+      )
+    )
   }
 
   return (
     <StyledMain>
-      <Heading>Note Chord</Heading>
-      <FingerboardFunctions>
-        <Fingerboard
-          handleClick={handleClick}
-          pressed={pressed}
-          offset={fretOffset}
-        ></Fingerboard>
-        <Arrows>
-          <ArrowButton
-            direction={true}
-            handleClick={handleFretOffset}
-          ></ArrowButton>
+      <Heading>Save Chord</Heading>
+      <ChordForm onSubmit={handleSafe}>
+        <label htmlFor="chords" />
+        <ChordNameInput
+          type="text"
+          id="chords"
+          onChange={(event) => setChordInput(event.target.value)}
+          placeholder="Name"
+          value={chordInput}
+          maxLength={10}
+        />
+        <FingerboardFunctions>
           <FretCounter start={fretOffset + 1} end={fretOffset + 4} />
-          <ArrowButton
-            direction={false}
-            handleClick={handleFretOffset}
-          ></ArrowButton>
-        </Arrows>
-      </FingerboardFunctions>
-      <SafeButton onClick={handleSafe}>
-        <Plus />
-      </SafeButton>
-      {renderSavedChords()}
+          <Fingerboard
+            onClick={handleStringClick}
+            pressed={pressed}
+            offset={fretOffset}
+          ></Fingerboard>
+          <Buttons>
+            <ArrowButton
+              direction={true}
+              onClick={handleFretOffset}
+            ></ArrowButton>
+            <SafeButton>
+              <PlusIcon
+                fill={!chordInput || !isStringPressed() ? '#8d8d8d' : 'inherit'}
+              />
+            </SafeButton>
+            <ArrowButton
+              direction={false}
+              onClick={handleFretOffset}
+            ></ArrowButton>
+          </Buttons>
+        </FingerboardFunctions>
+      </ChordForm>
+      <ChordList role="list">{renderSavedChords()}</ChordList>
     </StyledMain>
   )
 }
@@ -96,17 +152,16 @@ export default function Dashboard(): JSX.Element {
 const StyledMain = styled.main`
   display: grid;
   justify-items: center;
-  grid-template-rows: auto auto;
   grid-gap: 16px;
 `
 
 const FingerboardFunctions = styled.div`
   display: flex;
+  flex-direction: column;
 `
 
-const Arrows = styled.div`
+const Buttons = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
 `
 
@@ -114,8 +169,27 @@ const SafeButton = styled.button`
   background: none;
   border: none;
   padding: 0;
-  font: inherit;
   cursor: pointer;
-  outline: inherit;
   width: 50px;
+`
+
+const ChordName = styled.h2`
+  color: brown;
+`
+
+const ChordForm = styled.form`
+  display: grid;
+  justify-items: center;
+`
+
+const ChordNameInput = styled.input`
+  width: 120px;
+  border: 2px solid brown;
+  border-radius: 2px;
+  background-color: #ffddbd;
+  text-align: center;
+`
+
+const ChordList = styled.ul`
+  padding: 0;
 `
