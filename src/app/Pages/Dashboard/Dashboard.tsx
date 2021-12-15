@@ -111,7 +111,7 @@ export default function Dashboard(): JSX.Element {
   }
 
   return (
-    <StyledMain>
+    <SaveChord>
       <Heading>Save Chords</Heading>
       <ChordForm onSubmit={handleSafe}>
         <label htmlFor="chords" />
@@ -146,11 +146,11 @@ export default function Dashboard(): JSX.Element {
         </FingerboardFunctions>
       </ChordForm>
       <ChordList role="list">{renderSavedChords()}</ChordList>
-    </StyledMain>
+    </SaveChord>
   )
 }
 
-const StyledMain = styled.main`
+const SaveChord = styled.main`
   display: grid;
   justify-items: center;
   grid-gap: 16px;
