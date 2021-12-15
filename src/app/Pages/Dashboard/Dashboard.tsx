@@ -22,7 +22,7 @@ export default function Dashboard(): JSX.Element {
       offset: number
     }[]
   >([])
-  const [chordInput, setChordInput] = useState('')
+  const [chordInput, setChordInput] = useState('C Minor')
 
   function handleStringClick(column: number, row: number) {
     const newPressed = { ...pressed }
