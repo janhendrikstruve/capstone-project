@@ -112,7 +112,7 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <StyledMain>
-      <Heading>Save Chords</Heading>
+      <Heading>Chords!</Heading>
       <ChordForm onSubmit={handleSafe}>
         <label htmlFor="chords" />
         <ChordNameInput
@@ -193,6 +193,7 @@ const ChordNameInput = styled.input`
   border-radius: 2px;
   background-color: #ffddbd;
   text-align: center;
+  color: #111;
 `
 
 const ChordList = styled.ul`
