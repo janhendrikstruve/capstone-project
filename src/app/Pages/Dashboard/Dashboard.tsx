@@ -10,7 +10,7 @@ import {
   ArrowUpIcon,
 } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
-import useStickyState from '../../components/hooks/stickystate'
+import useStickyState from '../../components/hooks/stickyState/stickyState'
 
 export default function Dashboard(): JSX.Element {
   const [pressed, setPressed] = useStickyState(
