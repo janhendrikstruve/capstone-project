@@ -6,3 +6,9 @@ export type fingerboardDataType = {
   a: number
   e: number
 }
+
+export type savedChordType = {
+  chord: fingerboardDataType
+  name: string
+  offset: number
+}
