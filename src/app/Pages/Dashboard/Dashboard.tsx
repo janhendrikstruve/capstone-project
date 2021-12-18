@@ -131,7 +131,7 @@ export default function Dashboard({
             </ArrowButton>
           </Buttons>
           <ChordFolderButton to={'/chordfolder'}>
-            <StyledChordFolderIcon></StyledChordFolderIcon>
+            <ChordFolderIcon fill="brown"></ChordFolderIcon>
           </ChordFolderButton>
         </FingerboardFunctions>
       </ChordForm>
@@ -188,9 +188,4 @@ const ChordFolderButton = styled(Link)`
   border-radius: 8px;
   display: flex;
   justify-content: center;
-`
-
-const StyledChordFolderIcon = styled(ChordFolderIcon)`
-  filter: invert(23%) sepia(43%) saturate(3095%) hue-rotate(338deg)
-    brightness(87%) contrast(83%);
 `
