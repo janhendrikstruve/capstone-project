@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
@@ -7,6 +8,7 @@ import {
   PlusIcon,
   ArrowDownIcon,
   ArrowUpIcon,
+  ChordFolderIcon,
 } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 import useStickyState from '../../components/hooks/stickyState/stickyState'
@@ -128,9 +130,11 @@ export default function Dashboard({
               <ArrowDownIcon fill="brown" />
             </ArrowButton>
           </Buttons>
+          <ChordFolderButton to={'/chordfolder'}>
+            <StyledChordFolderIcon></StyledChordFolderIcon>
+          </ChordFolderButton>
         </FingerboardFunctions>
       </ChordForm>
-      <ChordFolder></ChordFolder>
     </SaveChord>
   )
 }
@@ -138,12 +142,12 @@ export default function Dashboard({
 const SaveChord = styled.main`
   display: grid;
   justify-items: center;
-  grid-gap: 16px;
 `
 
 const FingerboardFunctions = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0;
 `
 
 const Buttons = styled.div`
@@ -176,7 +180,18 @@ const ChordNameInput = styled.input`
   text-align: center;
 `
 
-const ChordFolder = styled.button`
-
+const ChordFolderButton = styled(Link)`
+  background: #ffddbd;
+  border: 2px solid brown;
+  cursor: pointer;
+  padding: 4px 0 4px;
+  border-radius: 8px;
+  display: flex;
+  justify-items: center;
 `
 
+const StyledChordFolderIcon = styled(ChordFolderIcon)`
+  filter: invert(23%) sepia(43%) saturate(3095%) hue-rotate(338deg)
+    brightness(87%) contrast(83%);
+  margin: auto;
+`
