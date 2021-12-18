@@ -98,7 +98,7 @@ const XYPosition = styled.div`
 `
 const Guitarstring = styled.div`
   padding: 20px 0;
-  border: 1px solid #b47601;
+  border: 2px solid #b47601;
 `
 const PressIcon = styled(FingerprintIcon)`
   position: absolute;
