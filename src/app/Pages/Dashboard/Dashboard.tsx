@@ -187,11 +187,10 @@ const ChordFolderButton = styled(Link)`
   padding: 4px 0 4px;
   border-radius: 8px;
   display: flex;
-  justify-items: center;
+  justify-content: center;
 `
 
 const StyledChordFolderIcon = styled(ChordFolderIcon)`
   filter: invert(23%) sepia(43%) saturate(3095%) hue-rotate(338deg)
     brightness(87%) contrast(83%);
-  margin: auto;
 `

@@ -10,10 +10,23 @@ export default function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Dashboard savedChords={savedChords} setSavedChords={setSavedChords} />} />
+        <Route
+          path="/"
+          element={
+            <Dashboard
+              savedChords={savedChords}
+              setSavedChords={setSavedChords}
+            />
+          }
+        />
         <Route
           path="/chordfolder"
-          element={<ChordFolder savedChords={savedChords} />}
+          element={
+            <ChordFolder
+              savedChords={savedChords}
+              setSavedChords={setSavedChords}
+            />
+          }
         />
       </Routes>
     </BrowserRouter>

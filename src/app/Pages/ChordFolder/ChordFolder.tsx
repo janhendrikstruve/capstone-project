@@ -3,29 +3,41 @@ import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import FretCounter from '../../components/Fret/FretCounter'
 import type { savedChordType } from '../../types'
 import styled from 'styled-components'
+import { TrashIcon } from '../../components/Icons/IconList'
 
-type ChordfolderTypes = {
+type ChordFolderTypes = {
   savedChords: savedChordType[]
+  setSavedChords: (value: savedChordType[]) => void
 }
 
 export default function ChordFolder({
   savedChords,
-}: ChordfolderTypes): JSX.Element {
+  setSavedChords,
+}: ChordFolderTypes): JSX.Element {
   function renderSavedChords() {
     return (
       savedChords &&
       savedChords.map(
         ({ chord, name, offset }: savedChordType, index: number) => (
           <Chord key={index}>
-            <BoardWithCounter>
+            <Fingerboard pressed={chord} offset={offset} />
+            <ChordInfo>
               <ChordName>{name}</ChordName>
               <FretCounter start={offset + 1} end={offset + 4} />
-            </BoardWithCounter>
-            <Fingerboard pressed={chord} offset={offset} />
+              <DeleteButton onClick={() => handleDelete(index)}>
+                <TrashIcon stroke="#ffddbd"></TrashIcon>
+              </DeleteButton>
+            </ChordInfo>
           </Chord>
         )
       )
     )
+  }
+
+  function handleDelete(index: number) {
+    const newSavedChords = [...savedChords]
+    newSavedChords.splice(index, 1)
+    setSavedChords(newSavedChords)
   }
 
   return <ChordList role="list">{renderSavedChords()}</ChordList>
@@ -35,7 +47,7 @@ const ChordList = styled.ul`
   padding: 0;
   display: grid;
   justify-items: center;
-  grid-gap: 40px;
+  grid-gap: 50px;
 `
 
 const ChordName = styled.h2`
@@ -48,18 +60,34 @@ const Chord = styled.li`
   justify-items: center;
   align-items: center;
   position: relative;
-  grid-gap: 20px;
 `
 
-const BoardWithCounter = styled.div`
+const ChordInfo = styled.div`
+  display: grid;
+  justify-items: center;
   &:after {
     content: ' ';
-    border: 2px solid #fff459;
+    border: 3px solid brown;
     pointer-events: none;
     position: absolute;
-    margin: auto;
-    width: 90%;
-    left: 5%;
-    top: -15px;
+    width: 95%;
+    left: 2.5%;
+    top: -28px;
+    border-radius: 4px;
   }
+`
+
+const DeleteButton = styled.button`
+  background: brown;
+  color: inherit;
+  border: none;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  width: 30px;
+  height: 30px;
+  padding: 2px;
+  border-radius: 4px;
+  justify-self: center;
+  margin-top: 20px;
 `
