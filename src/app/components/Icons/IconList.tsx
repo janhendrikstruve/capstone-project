@@ -6,6 +6,7 @@ export const IconArray = [
   MusicNoteIcon,
   StarIcon,
   CodeIcon,
+  ArrowDownIcon,
 ]
 
 export function FingerprintIcon(
