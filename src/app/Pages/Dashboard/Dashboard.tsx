@@ -9,6 +9,7 @@ import {
   ArrowDownIcon,
   ArrowUpIcon,
   ChordFolderIcon,
+  SearchIcon,
 } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 import useStickyState from '../../components/hooks/stickyState/stickyState'
@@ -146,9 +147,14 @@ export default function Dashboard({
               <ArrowDownIcon fill="brown" />
             </ArrowButton>
           </Buttons>
-          <ChordFolderButton to={'/chordfolder'}>
-            <ChordFolderIcon fill="brown"></ChordFolderIcon>
-          </ChordFolderButton>
+          <Links>
+            <ChordFolderButton to={'/chordfolder'}>
+              <ChordFolderIcon fill="brown"></ChordFolderIcon>
+            </ChordFolderButton>
+            <ChordFolderButton to={'/SearchingResults'}>
+              <SearchIcon stroke="brown"></SearchIcon>
+            </ChordFolderButton>
+          </Links>
         </FingerboardFunctions>
       </ChordForm>
     </SaveChord>
@@ -204,4 +210,10 @@ const ChordFolderButton = styled(Link)`
   border-radius: 8px;
   display: flex;
   justify-content: center;
+`
+
+const Links = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2px;
 `

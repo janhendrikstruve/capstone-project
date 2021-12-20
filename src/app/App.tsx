@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import ChordFolder from './Pages/ChordFolder/ChordFolder'
+import SearchingResults from './Pages/SearchingResults/SearchingResults'
 import type { savedChordType } from './types'
 import useStickyState from './components/hooks/stickyState/stickyState'
 import useFetch from './components/hooks/useFetch/useFetch'
@@ -41,6 +42,7 @@ export default function App(): JSX.Element {
             />
           }
         />
+        <Route path="/searchingresults" element={<SearchingResults />} />
       </Routes>
     </BrowserRouter>
   )
