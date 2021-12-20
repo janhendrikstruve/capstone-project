@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components'
+
+const ResetDefaults = createGlobalStyle`
 /* Box sizing rules */
 *,
 *::before,
@@ -71,6 +74,6 @@ select {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-}
+}`
 
-/* Credits to  Piccalilli */
+export default ResetDefaults

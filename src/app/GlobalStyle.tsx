@@ -1,4 +1,6 @@
-@import url('resetDefaults');
+import { createGlobalStyle } from 'styled-components'
+
+const GlobalStyle = createGlobalStyle`
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -17,4 +19,6 @@ code {
 
 * {
   box-sizing: border-box;
-}
+}`
+
+export default GlobalStyle
