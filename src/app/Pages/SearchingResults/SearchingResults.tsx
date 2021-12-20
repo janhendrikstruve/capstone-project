@@ -68,7 +68,7 @@ export default function ChordFolder(): JSX.Element {
     <>
       <Heading>Chord Folder</Heading>
       <BackToInputButton to={'/'}>
-        <StyledBackIcon fill="brown"></StyledBackIcon>
+        <StyledBackIcon fill="var(--c-brown)"></StyledBackIcon>
       </BackToInputButton>
       <ChordList role="list">{renderSavedChords()}</ChordList>
     </>
@@ -83,7 +83,7 @@ const ChordList = styled.ul`
 `
 
 const ChordName = styled.h2`
-  color: brown;
+  color: var(--c-brown);
 `
 
 const Chord = styled.li`
@@ -102,7 +102,7 @@ const ChordInfo = styled.div<{ index: number }>`
     css`
       &:after {
         content: ' ';
-        border: 3px solid brown;
+        border: 3px solid var(--c-brown);
         pointer-events: none;
         position: absolute;
         width: 95%;

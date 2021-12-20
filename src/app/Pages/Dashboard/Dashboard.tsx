@@ -136,23 +136,25 @@ export default function Dashboard({
           ></Fingerboard>
           <Buttons>
             <ArrowButton onClick={(event) => handleFretOffset(event, true)}>
-              <ArrowUpIcon fill="brown" />
+              <ArrowUpIcon fill="var(--c-brown)" />
             </ArrowButton>
             <Button>
               <PlusIcon
-                fill={!chordInput || !isStringPressed() ? '#6a6a6a' : 'brown'}
+                fill={
+                  !chordInput || !isStringPressed() ? 'var(--c-grey)' : 'brown'
+                }
               />
             </Button>
             <ArrowButton onClick={(event) => handleFretOffset(event, false)}>
-              <ArrowDownIcon fill="brown" />
+              <ArrowDownIcon fill="var(--c-brown)" />
             </ArrowButton>
           </Buttons>
           <Links>
             <ChordFolderButton to={'/chordfolder'}>
-              <ChordFolderIcon fill="brown"></ChordFolderIcon>
+              <ChordFolderIcon fill="var(--c-brown)"></ChordFolderIcon>
             </ChordFolderButton>
             <ChordFolderButton to={'/SearchingResults'}>
-              <SearchIcon stroke="brown"></SearchIcon>
+              <SearchIcon stroke="var(--c-brown)"></SearchIcon>
             </ChordFolderButton>
           </Links>
         </FingerboardFunctions>
@@ -192,19 +194,22 @@ const ArrowButton = styled(Button)`
 const ChordForm = styled.form`
   display: grid;
   justify-items: center;
+  transform: scale(1.5);
+  transform-origin: center top;
+  margin-top: 20px;
 `
 
 const ChordNameInput = styled.input`
   width: 120px;
-  border: 2px solid brown;
+  border: 2px solid var(--c-brown);
   border-radius: 2px;
-  background-color: #ffddbd;
+  background-color: var(--c-beige);
   text-align: center;
 `
 
 const ChordFolderButton = styled(Link)`
-  background: #ffddbd;
-  border: 2px solid brown;
+  background: var(--c-beige);
+  border: 2px solid var(--c-brown);
   cursor: pointer;
   padding: 4px 0 4px;
   border-radius: 8px;

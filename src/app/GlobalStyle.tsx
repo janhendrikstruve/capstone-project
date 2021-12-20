@@ -9,7 +9,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  background-color: lightblue;
+  background-color: var(--c-blue);
 }
 
 code {
@@ -19,6 +19,16 @@ code {
 
 * {
   box-sizing: border-box;
-}`
+}
+
+:root {
+    --c-beige: #ffd6b0;
+    --c-brown:#a52a2a;
+    --c-blue:#add8e6;
+    --c-brass:#b47601;
+    --c-grey: #6a6a6a;
+  }
+
+`
 
 export default GlobalStyle

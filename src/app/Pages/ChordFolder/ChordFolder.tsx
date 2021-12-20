@@ -28,7 +28,7 @@ export default function ChordFolder({
               <FretCounter start={offset + 1} end={offset + 4} />
 
               <DeleteButton onClick={() => handleDelete(id)}>
-                <TrashIcon stroke="#ffddbd"></TrashIcon>
+                <TrashIcon stroke="var(--c-beige)"></TrashIcon>
               </DeleteButton>
             </ChordInfo>
           </Chord>
@@ -61,7 +61,7 @@ export default function ChordFolder({
     <>
       <Heading>Chord Folder</Heading>
       <BackToInputButton to={'/'}>
-        <StyledBackIcon fill="brown"></StyledBackIcon>
+        <StyledBackIcon fill="var(--c-brown)"></StyledBackIcon>
       </BackToInputButton>
       <ChordList role="list">{renderSavedChords()}</ChordList>
     </>
@@ -76,7 +76,7 @@ const ChordList = styled.ul`
 `
 
 const ChordName = styled.h2`
-  color: brown;
+  color: var(--c-brown);
 `
 
 const Chord = styled.li`
@@ -95,7 +95,7 @@ const ChordInfo = styled.div<{ index: number }>`
     css`
       &:after {
         content: ' ';
-        border: 3px solid brown;
+        border: 3px solid var(--c-brown);
         pointer-events: none;
         position: absolute;
         width: 95%;
@@ -107,7 +107,7 @@ const ChordInfo = styled.div<{ index: number }>`
 `
 
 const DeleteButton = styled.button`
-  background: brown;
+  background: var(--c-brown);
   color: inherit;
   border: none;
   font: inherit;

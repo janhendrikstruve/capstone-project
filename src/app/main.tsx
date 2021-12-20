@@ -6,8 +6,8 @@ import ResetDefaults from './ResetDefaults'
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
     <ResetDefaults />
+    <GlobalStyle />
     <App />
   </React.StrictMode>,
   document.querySelector('#app')
