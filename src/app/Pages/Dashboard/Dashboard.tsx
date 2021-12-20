@@ -13,6 +13,7 @@ import {
 import type { fingerboardDataType } from '../../types'
 import useStickyState from '../../components/hooks/stickyState/stickyState'
 import type { savedChordType } from '../../types'
+import { nanoid } from 'nanoid'
 
 type DashboardTypes = {
   savedChords: savedChordType[]
@@ -90,6 +91,7 @@ export default function Dashboard({
         chord: pressed,
         name: chordInput,
         offset: fretOffset,
+        id: nanoid(),
       }
       setSavedChords([newChord, ...savedChords])
       const res = await fetch('/api/savedchords', {

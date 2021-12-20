@@ -11,4 +11,5 @@ export type savedChordType = {
   chord: fingerboardDataType
   name: string
   offset: number
+  id: string
 }

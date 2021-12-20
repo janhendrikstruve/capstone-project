@@ -19,6 +19,13 @@ app.post('/api/savedchords', async (request, response) => {
   await getSavedChords().insertOne(newChord)
   response.status(200).send('chord sent')
 })
+
+app.delete('/api/savedchords', async (request, response) => {
+  const { id } = request.body
+  await getSavedChords().deleteOne({ id })
+  response.status(200).send('chord deleted')
+})
+
 app.get('/api/hello', (_request, response) => {
   response.json({ message: 'Hello API!' })
 })

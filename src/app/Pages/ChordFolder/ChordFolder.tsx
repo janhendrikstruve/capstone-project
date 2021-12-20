@@ -20,14 +20,14 @@ export default function ChordFolder({
     return (
       savedChords &&
       savedChords.map(
-        ({ chord, name, offset }: savedChordType, index: number) => (
+        ({ chord, name, offset, id }: savedChordType, index: number) => (
           <Chord key={index}>
             <Fingerboard pressed={chord} offset={offset} />
             <ChordInfo index={index}>
               <ChordName>{name}</ChordName>
               <FretCounter start={offset + 1} end={offset + 4} />
 
-              <DeleteButton onClick={() => handleDelete(index)}>
+              <DeleteButton onClick={() => handleDelete(id)}>
                 <TrashIcon stroke="#ffddbd"></TrashIcon>
               </DeleteButton>
             </ChordInfo>
@@ -37,10 +37,24 @@ export default function ChordFolder({
     )
   }
 
-  function handleDelete(index: number) {
-    const newSavedChords = [...savedChords]
-    newSavedChords.splice(index, 1)
+  async function handleDelete(id: string) {
+    const newSavedChords = savedChords.filter((item) => item.id !== id)
     setSavedChords(newSavedChords)
+
+    const res = await fetch('/api/savedchords', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id }),
+    })
+    if (res.ok) {
+      console.log(`successfully deleted`)
+    } else {
+      console.error(
+        'Sie Idiot, sie haben den Wasserstofftank in die Luft gejagt'
+      )
+    }
   }
 
   return (
