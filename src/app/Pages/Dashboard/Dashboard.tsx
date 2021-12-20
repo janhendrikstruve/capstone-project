@@ -83,7 +83,7 @@ export default function Dashboard({
     return false
   }
 
-  function handleSafe(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSafe(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (chordInput && isStringPressed()) {
       const newChord = {
@@ -92,6 +92,20 @@ export default function Dashboard({
         offset: fretOffset,
       }
       setSavedChords([newChord, ...savedChords])
+      const res = await fetch('/api/savedchords', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newChord),
+      })
+      if (res.ok) {
+        console.log(`${newChord.name} successfully written`)
+      } else {
+        console.error(
+          'Sie Idiot, sie haben den Wasserstofftank in die Luft gejagt'
+        )
+      }
     } else if (chordInput.length) alert('Press at least one String')
     else if (isStringPressed()) alert('Give your Chord a Name')
     else alert('Give your Chord a Name and press at least one String')
