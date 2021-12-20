@@ -196,7 +196,7 @@ const ChordForm = styled.form`
   justify-items: center;
   transform: scale(1.5);
   transform-origin: center top;
-  margin-top: 20px;
+  margin-top: 30px;
 `
 
 const ChordNameInput = styled.input`
