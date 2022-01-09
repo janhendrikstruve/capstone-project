@@ -1,75 +1,65 @@
 import React from 'react'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import FretCounter from '../../components/Fret/FretCounter'
-import type { savedChordType } from '../../types'
+import type { savedChordType, fetchedChordType } from '../../types'
 import styled, { css } from 'styled-components'
 import { BackIcon } from '../../components/Icons/IconList'
 import { Link } from 'react-router-dom'
 import Heading from '../../components/Heading/Heading'
+import useFetch from '../../components/hooks/useFetch/useFetch'
+import { nanoid } from 'nanoid'
 
 export default function ChordFolder(): JSX.Element {
-  const foundChords = [
-    {
-      id: '1',
-      chord: {
-        e2: 0,
-        b: 1,
-        g: 0,
-        d: 2,
-        a: 3,
-        e: 0,
-      },
-      name: 'C Major',
-      offset: 0,
-    },
-    {
-      id: '2',
-      chord: {
-        e2: 3,
-        b: 0,
-        g: 0,
-        d: 0,
-        a: 2,
-        e: 3,
-      },
-      name: 'G Major',
-      offset: 0,
-    },
-    {
-      id: '3',
-      chord: {
-        e2: 2,
-        b: 3,
-        g: 2,
-        d: 0,
-        a: 0,
-        e: 0,
-      },
-      name: 'D Major',
-      offset: 0,
-    },
-  ]
-
   function renderSavedChords() {
-    return foundChords.map(
-      ({ chord, name, offset }: savedChordType, index: number) => (
-        <Chord key={index}>
-          <Fingerboard pressed={chord} offset={offset} />
-          <ChordInfo index={index}>
-            <ChordName>{name}</ChordName>
-            <FretCounter start={offset + 1} end={offset + 4} />
-          </ChordInfo>
-        </Chord>
+    const chordsToDisplay = fetchChords()
+    return (
+      chordsToDisplay &&
+      chordsToDisplay.map(
+        ({ chord, name, offset }: savedChordType, index: number) => (
+          <Chord key={index}>
+            <Fingerboard pressed={chord} offset={offset} />
+            <ChordInfo index={index}>
+              <ChordName>{name}</ChordName>
+              <FretCounter start={offset + 1} end={offset + 4} />
+            </ChordInfo>
+          </Chord>
+        )
       )
+    )
+  }
+
+  function fetchChords() {
+    const fetchedChords = useFetch<fetchedChordType>(
+      'http://pargitaru.id.lv/api/'
+    )
+    console.log(fetchedChords)
+    return (
+      fetchedChords &&
+      fetchedChords.chords.map((chord) => {
+        //const modf = chord.modf
+        return {
+          chord: {
+            e2: chord.e2,
+            b: chord.b,
+            g: chord.g,
+            d: chord.e2,
+            a: chord.e2,
+            e: chord.e2,
+          },
+          name: chord.chord,
+          offset: 0,
+          id: nanoid(),
+        }
+      })
     )
   }
 
   return (
     <>
-      <Heading>Chord Folder</Heading>
-      <BackToInputButton to={'/'}>
+      <Heading>Results</Heading>
+      <BackToInputLink to={'/'}>
         <StyledBackIcon fill="var(--c-brown)"></StyledBackIcon>
-      </BackToInputButton>
+      </BackToInputLink>
       <ChordList role="list">{renderSavedChords()}</ChordList>
     </>
   )
@@ -112,7 +102,7 @@ const ChordInfo = styled.div<{ index: number }>`
       }
     `}
 `
-const BackToInputButton = styled(Link)`
+const BackToInputLink = styled(Link)`
   cursor: pointer;
 `
 
