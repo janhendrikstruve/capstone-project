@@ -9,7 +9,6 @@ dotenv.config()
 app.use(express.json())
 
 app.get('/api/savedchords', async (_request, response) => {
-  console.log('it worked!')
   const allSavedChords = await getSavedChords().find().toArray()
   response.status(200).send(allSavedChords)
 })

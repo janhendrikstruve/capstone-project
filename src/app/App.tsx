@@ -17,7 +17,6 @@ export default function App(): JSX.Element {
   )
 
   useEffect(() => {
-    console.log(fetchedSavedChords)
     fetchedSavedChords ? setSavedChords(fetchedSavedChords) : setSavedChords([])
   }, [fetchedSavedChords])
 

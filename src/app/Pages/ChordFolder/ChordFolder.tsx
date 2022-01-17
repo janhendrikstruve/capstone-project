@@ -41,20 +41,13 @@ export default function ChordFolder({
     const newSavedChords = savedChords.filter((item) => item.id !== id)
     setSavedChords(newSavedChords)
 
-    const res = await fetch('/api/savedchords', {
+    await fetch('/api/savedchords', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id }),
     })
-    if (res.ok) {
-      console.log(`successfully deleted`)
-    } else {
-      console.error(
-        'Sie Idiot, sie haben den Wasserstofftank in die Luft gejagt'
-      )
-    }
   }
 
   return (
