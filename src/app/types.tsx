@@ -15,14 +15,10 @@ export type savedChordType = {
 }
 
 export type fetchedChordType = {
-  chords: {
-    chord: string
-    modf: string
-    e2: number
-    b: number
-    g: number
-    d: number
-    a: number
-    e: number
-  }[]
+  chordName: string
+  enharmonicChordName: string
+  fingering: string
+  strings: string
+  tones: string
+  voicingID: string
 }
