@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import React from 'react'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
 import FretCounter from '../../components/Fret/FretCounter'
@@ -6,16 +7,52 @@ import styled, { css } from 'styled-components'
 import { BackIcon } from '../../components/Icons/IconList'
 import { Link } from 'react-router-dom'
 import Heading from '../../components/Heading/Heading'
-import useFetch from '../../components/hooks/useFetch/useFetch'
-import { nanoid } from 'nanoid'
+import Axios from 'axios'
 
-export default function ChordFolder(): JSX.Element {
-  function renderSavedChords() {
-    const chordsToDisplay = fetchChords()
+export default function SearchingResults(): JSX.Element {
+  const [rawFetchedChords, setRawFetchedChords] = useState<fetchedChordType[]>(
+    []
+  )
+
+  useEffect(() => {
+    async function getChords() {
+      const chords = await Axios.get(
+        `https://api.uberchord.com/v1/chords?nameLike=C`
+      )
+      console.log(chords)
+      setRawFetchedChords(chords.data)
+    }
+
+    getChords()
+  }, [])
+
+  function renderFetchedChords() {
+    const fetchedChords = rawFetchedChords.map((chord: fetchedChordType) => {
+      const stringsinOneString = chord.strings.split(' ')
+      const strings = stringsinOneString.map((string: string) =>
+        parseInt(string)
+      )
+      const grabbedStrings = strings.filter((string: number) => string > 0)
+      const offset = Math.min(...grabbedStrings)
+      return {
+        chord: {
+          e2: strings[5],
+          b: strings[4],
+          g: strings[3],
+          d: strings[2],
+          a: strings[1],
+          e: strings[0],
+        },
+        name: chord.chordName,
+        offset: offset,
+        id: chord.voicingID,
+      }
+    })
+
     return (
-      chordsToDisplay &&
-      chordsToDisplay.map(
-        ({ chord, name, offset }: savedChordType, index: number) => (
+      fetchedChords &&
+      fetchedChords.map(
+        ({ chord, offset, name }: savedChordType, index: number) => (
           <Chord key={index}>
             <Fingerboard pressed={chord} offset={offset} />
             <ChordInfo index={index}>
@@ -28,39 +65,13 @@ export default function ChordFolder(): JSX.Element {
     )
   }
 
-  function fetchChords() {
-    const fetchedChords = useFetch<fetchedChordType>(
-      'http://pargitaru.id.lv/api/'
-    )
-    console.log(fetchedChords)
-    return (
-      fetchedChords &&
-      fetchedChords.chords.map((chord) => {
-        //const modf = chord.modf
-        return {
-          chord: {
-            e2: chord.e2,
-            b: chord.b,
-            g: chord.g,
-            d: chord.e2,
-            a: chord.e2,
-            e: chord.e2,
-          },
-          name: chord.chord,
-          offset: 0,
-          id: nanoid(),
-        }
-      })
-    )
-  }
-
   return (
     <>
       <Heading>Results</Heading>
       <BackToInputLink to={'/'}>
         <StyledBackIcon fill="var(--c-brown)"></StyledBackIcon>
       </BackToInputLink>
-      <ChordList role="list">{renderSavedChords()}</ChordList>
+      <ChordList role="list">{renderFetchedChords()}</ChordList>
     </>
   )
 }
