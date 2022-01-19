@@ -19,5 +19,5 @@ export default function FretCounter({
 const Counter = styled.div`
   align-self: center;
   font-weight: bold;
-  color: brown;
+  color: var(--c-brown); ;
 `

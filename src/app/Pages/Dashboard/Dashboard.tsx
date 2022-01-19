@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Fingerboard from '../../components/Fingerboard/Fingerboard'
-import { fingerboardData } from '../../data/fingerboardData/fingerboardData'
 import Heading from '../../components/Heading/Heading'
 import styled from 'styled-components'
 import FretCounter from '../../components/Fret/FretCounter'
@@ -8,23 +8,35 @@ import {
   PlusIcon,
   ArrowDownIcon,
   ArrowUpIcon,
+  ChordFolderIcon,
+  SearchIcon,
 } from '../../components/Icons/IconList'
 import type { fingerboardDataType } from '../../types'
 import useStickyState from '../../components/hooks/stickyState/stickyState'
+import type { savedChordType } from '../../types'
+import { nanoid } from 'nanoid'
 
-export default function Dashboard(): JSX.Element {
-  const [pressed, setPressed] = useStickyState(
-    fingerboardData,
+type DashboardTypes = {
+  savedChords: savedChordType[]
+  setSavedChords: (value: savedChordType[]) => void
+}
+
+export default function Dashboard({
+  savedChords,
+  setSavedChords,
+}: DashboardTypes): JSX.Element {
+  const [pressed, setPressed] = useStickyState<fingerboardDataType>(
+    {
+      e2: 0,
+      b: 0,
+      g: 0,
+      d: 0,
+      a: 0,
+      e: 0,
+    },
     'fingerboardData'
   )
   const [fretOffset, setFretOffset] = useStickyState(0, 'fretOffset')
-  const [savedChords, setSavedChords] = useStickyState<
-    {
-      chord: fingerboardDataType
-      name: string
-      offset: number
-    }[]
-  >([], 'savedChords')
   const [chordInput, setChordInput] = useStickyState('', 'chordInput')
 
   function handleStringClick(column: number, row: number) {
@@ -73,48 +85,30 @@ export default function Dashboard(): JSX.Element {
     return false
   }
 
-  function handleSafe(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSafe(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     if (chordInput && isStringPressed()) {
       const newChord = {
         chord: pressed,
         name: chordInput,
         offset: fretOffset,
+        id: nanoid(),
       }
       setSavedChords([newChord, ...savedChords])
+      await fetch('/api/savedchords', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newChord),
+      })
     } else if (chordInput.length) alert('Press at least one String')
     else if (isStringPressed()) alert('Give your Chord a Name')
     else alert('Give your Chord a Name and press at least one String')
   }
 
-  function renderSavedChords() {
-    return (
-      savedChords &&
-      savedChords.map(
-        (
-          {
-            chord,
-            name,
-            offset,
-          }: {
-            chord: fingerboardDataType
-            name: string
-            offset: number
-          },
-          index: number
-        ) => (
-          <li key={index}>
-            <ChordName>{name}</ChordName>
-            <FretCounter start={offset + 1} end={offset + 4} />
-            <Fingerboard pressed={chord} offset={offset} />
-          </li>
-        )
-      )
-    )
-  }
-
   return (
-    <StyledMain>
+    <SaveChord>
       <Heading>Save Chords</Heading>
       <ChordForm onSubmit={handleSafe}>
         <label htmlFor="chords" />
@@ -135,33 +129,42 @@ export default function Dashboard(): JSX.Element {
           ></Fingerboard>
           <Buttons>
             <ArrowButton onClick={(event) => handleFretOffset(event, true)}>
-              <ArrowUpIcon fill="brown" />
+              <ArrowUpIcon fill="var(--c-brown)" />
             </ArrowButton>
             <Button>
               <PlusIcon
-                fill={!chordInput || !isStringPressed() ? '#6a6a6a' : 'brown'}
+                fill={
+                  !chordInput || !isStringPressed() ? 'var(--c-grey)' : 'brown'
+                }
               />
             </Button>
             <ArrowButton onClick={(event) => handleFretOffset(event, false)}>
-              <ArrowDownIcon fill="brown" />
+              <ArrowDownIcon fill="var(--c-brown)" />
             </ArrowButton>
           </Buttons>
+          <Links>
+            <ChordFolderButton to={'/chordfolder'}>
+              <ChordFolderIcon fill="var(--c-brown)"></ChordFolderIcon>
+            </ChordFolderButton>
+            <ChordFolderButton to={'/SearchingResults'}>
+              <SearchIcon stroke="var(--c-brown)"></SearchIcon>
+            </ChordFolderButton>
+          </Links>
         </FingerboardFunctions>
       </ChordForm>
-      <ChordList role="list">{renderSavedChords()}</ChordList>
-    </StyledMain>
+    </SaveChord>
   )
 }
 
-const StyledMain = styled.main`
+const SaveChord = styled.main`
   display: grid;
   justify-items: center;
-  grid-gap: 16px;
 `
 
 const FingerboardFunctions = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0;
 `
 
 const Buttons = styled.div`
@@ -181,23 +184,34 @@ const ArrowButton = styled(Button)`
   width: 40px;
 `
 
-const ChordName = styled.h2`
-  color: brown;
-`
-
 const ChordForm = styled.form`
   display: grid;
   justify-items: center;
+  transform: scale(1.5);
+  transform-origin: center top;
+  margin-top: 30px;
 `
 
 const ChordNameInput = styled.input`
   width: 120px;
-  border: 2px solid brown;
+  border: 2px solid var(--c-brown);
   border-radius: 2px;
-  background-color: #ffddbd;
+  background-color: var(--c-beige);
   text-align: center;
 `
 
-const ChordList = styled.ul`
-  padding: 0;
+const ChordFolderButton = styled(Link)`
+  background: var(--c-beige);
+  border: 2px solid var(--c-brown);
+  cursor: pointer;
+  padding: 4px 0 4px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+`
+
+const Links = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2px;
 `

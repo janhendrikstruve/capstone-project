@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function useLocalStorage<T>(
+export default function useStickyState<T>(
   initialValue: T,
   key: string
 ): [storedValue: T, setStoredValue: (value: T) => void] {

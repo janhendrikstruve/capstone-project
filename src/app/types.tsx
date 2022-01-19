@@ -6,3 +6,19 @@ export type fingerboardDataType = {
   a: number
   e: number
 }
+
+export type savedChordType = {
+  chord: fingerboardDataType
+  name: string
+  offset: number
+  id: string
+}
+
+export type fetchedChordType = {
+  chordName: string
+  enharmonicChordName: string
+  fingering: string
+  strings: string
+  tones: string
+  voicingID: string
+}

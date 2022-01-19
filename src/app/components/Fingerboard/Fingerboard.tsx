@@ -73,7 +73,7 @@ const Board = styled.section<Partial<fingerboardProps>>`
         top: 2px;
         left: 0px;
         right: 0px;
-        border-top: 3px solid brown;
+        border-top: 3px solid var(--c-brown);
         pointer-events: none;
       }
     `}
@@ -81,7 +81,7 @@ const Board = styled.section<Partial<fingerboardProps>>`
   position: relative;
   display: flex;
   flex-direction: row;
-  border: 3px solid brown;
+  border: 3px solid var(--c-brown);
   width: fit-content;
   background-color: #202020;
   border-radius: 2px;
@@ -93,12 +93,13 @@ const YPosition = styled.span`
 `
 const XYPosition = styled.div`
   padding: 0 10px;
-  background-color: #ffddbd;
+  background-color: var(--c-beige);
   position: relative;
 `
 const Guitarstring = styled.div`
   padding: 20px 0;
-  border: 1px solid #b47601;
+  border: 1px solid var(--c-brass);
+  background: var(--c-brass);
 `
 const PressIcon = styled(FingerprintIcon)`
   position: absolute;

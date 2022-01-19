@@ -11,10 +11,11 @@ export default function Heading({
 }
 
 const StyledH1 = styled.h1`
-  color: #111;
+  color: var(--c-brown);
   text-transform: uppercase;
   width: 100%;
   text-align: center;
-  background-color: #fff459;
+  background-color: var(--c-beige);
   margin-bottom: 30px;
+  border-bottom: 4px solid var(--c-brown);
 `
