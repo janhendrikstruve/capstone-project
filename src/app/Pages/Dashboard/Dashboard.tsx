@@ -27,17 +27,17 @@ export default function Dashboard({
 }: DashboardTypes): JSX.Element {
   const [pressed, setPressed] = useStickyState<fingerboardDataType>(
     {
-      e2: 3,
+      e2: 0,
       b: 0,
       g: 0,
       d: 0,
-      a: 2,
-      e: 3,
+      a: 0,
+      e: 0,
     },
     'fingerboardData'
   )
   const [fretOffset, setFretOffset] = useStickyState(0, 'fretOffset')
-  const [chordInput, setChordInput] = useStickyState('G Major', 'chordInput')
+  const [chordInput, setChordInput] = useStickyState('', 'chordInput')
 
   function handleStringClick(column: number, row: number) {
     const newPressed = { ...pressed }
